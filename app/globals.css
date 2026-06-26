@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #E8D8F0;
+  color: #1A1A1A;
+  overflow-x: hidden;
+}
+
+@keyframes growBar {
+  from { width: 0%; }
+  to { width: var(--bar-value); }
+}
+
+.score-bar-fill {
+  animation: growBar 600ms ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-stagger {
+  animation: fadeIn 400ms ease-out forwards;
+}
+
+.category-strip {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.process-steps {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.process-steps::-webkit-scrollbar {
+  display: none;
+}
