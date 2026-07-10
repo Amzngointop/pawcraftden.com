@@ -19,7 +19,7 @@ export const content: ArticleBody = {
           AVMA&apos;s pet care resources
         </a>{" "}
         emphasize that consistent feeding routines support healthy digestion
-        and weight management. Below we compare six bowl and feeder options
+        and weight management. Below we compare five bowl and feeder options
         across elevation, material, water dispensing, and programmable
         portion control to help you match a setup to your dog&apos;s size and
         your household&apos;s routine.
@@ -248,12 +248,6 @@ export const content: ArticleBody = {
       bestForLabel: "Best Value Bowl Set",
       keyFeature: "Affordable non-skid 2-pack",
       topCon: "No elevation for larger dogs",
-    },
-    {
-      productId: 45,
-      bestForLabel: "Best Non-Slip Design",
-      keyFeature: "Heavier-gauge grippy base",
-      topCon: "Rubber base can yellow over time",
     },
     {
       productId: 46,
