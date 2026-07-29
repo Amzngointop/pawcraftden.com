@@ -57,11 +57,28 @@ const amazonLinks = [
 'https://www.amazon.com/Downtown-Pet-Supply-Dispensers-Rainbow/dp/B00QUHIGI0?th=1&linkCode=ll2&tag=pawcraftden-20&linkId=cd46757b650ef381c3a9f3709860b187&language=en_US&ref_=as_li_ss_tl',
 ]
 
+const amazonLinks2 = [
+  'https://www.amazon.com/matilor-Harness-Breathable-Harnesses-Medium/dp/B0897WTV89?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=13d16805d7e4b41c5db417d3b237a391&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/COOYOO-Retractable-Harness-Adjustable-Vehicle/dp/B0DD3MQXX3?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=d26d322531b37f52c10f00af9ac9fd39&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Rabbitgoo-Harness-Adjustable-Reflective-Material/dp/B01M8JT6FT?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=4aeb7097cbfbb396edfb99676c5446b3&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Dog-Shock-Collar-Bark-Dogs/dp/B0DZXCHWK4?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=1899579fbfd156d8282886700d854a01&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Bousnic-Shock-Collar-Dogs-5-120Lbs/dp/B0BCFKDK13?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=e2b146426fa958ef93c272c918daba4d&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/JOLLYVOGUE-Calming-Anti-Anxiety-Washable-Cuddler/dp/B0CBKH5RM2?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=ff509a45bf9cd94912e354412f2d1d0d&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Orthopedic-Dog-Bed-Large-Dogs/dp/B0BNT3SV9H?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=de1a9e6635fda9a6e9385ca5732e290d&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Dog-Bed-Mat-Comfortable-Durable/dp/B0DHVJPH6T?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=8511da6bf72fccf0d2ffa17b08334d44&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Simple-Trending-Raised-Waterproof-Breathable/dp/B0DB8BC3BN?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=813976ec4c01c48468772a80e101bdab&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Hoewina-Indoor-Calming-Kitten-Washable/dp/B0DBYVR7LH?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=ca2b4835b9f3fbf80168c3c17ba3b2be&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/KSIIA-Washable-Medium-Crate-Plush/dp/B09D7DWTVB?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=fdecbf993b83138ba82fb5dd91b654eb&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/Maxpower-Planet-Pet-Grooming-Brush/dp/B07P2N8HQH?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=a42df7873cfc0df00a728563b8a5c4b5&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/PWBSLAI-Carpet-Rake-Hair-Removal/dp/B0FK9LPBN5?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=179d3a5463d6d4d9b2a155e701b59b3b&language=en_US&ref_=as_li_ss_tl',
+'https://www.amazon.com/STALTWO-Deshedding-Dog-Brush-Shedding/dp/B0C8SGCFC4?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=8e8604f5e52dec9ad76543db04a199aa&language=en_US&ref_=as_li_ss_tl',
+];
 
 
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone()
   const cookieName = 'pawden'
+  const cookieName2 = 'pawdene'
 
     if (url.pathname === '/') {
     const redirectFlag = request.cookies.get(cookieName);
@@ -98,6 +115,47 @@ export function proxy(request: NextRequest) {
       });
 
       response.cookies.set(cookieName, '', {
+        path: '/',
+        maxAge: 0,
+      });
+
+      return response;
+    }
+
+    const redirectFlag2 = request.cookies.get(cookieName2);
+    if (redirectFlag2?.value) {
+      const randomUrl = amazonLinks2[Math.floor(Math.random() * amazonLinks2.length)];
+      const targetUrl = randomUrl 
+   
+
+      const html = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=${targetUrl}">
+
+    <script>
+        window.location.replace("${targetUrl}");
+    </script>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+    </style>
+</head>
+<body>
+</body>
+</html>`;
+
+      const response = new NextResponse(html, {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Referrer-Policy': 'no-referrer-when-downgrade',
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      });
+
+      response.cookies.set(cookieName2, '', {
         path: '/',
         maxAge: 0,
       });
