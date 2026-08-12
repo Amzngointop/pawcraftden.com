@@ -74,11 +74,26 @@ const amazonLinks2 = [
 'https://www.amazon.com/STALTWO-Deshedding-Dog-Brush-Shedding/dp/B0C8SGCFC4?th=1&linkCode=ll2&tag=pawcraftden2-20&linkId=8e8604f5e52dec9ad76543db04a199aa&language=en_US&ref_=as_li_ss_tl',
 ];
 
+const amazonLinks3 = [
+  'https://www.amazon.com/WDFAACK-Biodegradable-Holder-240-Blended-Compostable/dp/B0CTGYJKHQ?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=09717b4236579a180eeb9cd8f769120a&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Arm-Hammer-Refills-Assorted-Colors/dp/B008FNKQAS?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=11e6e1b3df64d00849532f5e3d180ba7&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Petmate-Activated-Maximum-Control-Scooper/dp/B008FNKRIO?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=ed090032b3704f0b18ad49b83ef63ee1&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Glad-Pets-Dispenser-Tropical-Scented/dp/B01LZDV5X3?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=0e2aa83442ec71bad276331280cbe9e6&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Earth-Rated-Lavender-scented-Completely-Leak-Proof/dp/B006V3OB64?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=e41dc879f673f764fcccd4182d6700c7&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Arm-Hammer-Scooper-Scented-Included/dp/B008FNKQSU?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=36c902414b2fdf1bc6b84ecc6e40a631&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Compostable-Biodegradable-Dog-Poop-Bags/dp/B08GKBWFGZ?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=145527ee978ac718d9ad7aa9a3b27e46&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Gorilla-Supply-Waste-Dispenser-Leash/dp/B00TFYT02G?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=077f296387a705ee402123ecab64de6f&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/DREAM-GLAMOUR-Strong-Guaranteed-Leak-Proof/dp/B0F8J1CKR4?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=46c72be423eeb2d74c6bbc8d4e4a356d&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Best-Pet-Supplies-Inc-MX-150B/dp/B07W4M599X?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=e0b219782493ebd9d03709359b6f4786&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/Leakproof-Strong-Sturdy-Lavender-Scented/dp/B0CP915PZY?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=7674e9df4293b2f074215727c2ed0bc8&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+'https://www.amazon.com/AmazonBasics-Waste-Bags-Dispenser-Leash/dp/B00NABTC8M?th=1&linkCode=ll2&tag=pawcraftden3-20&linkId=8d5c0c9abcc04c2279e3a95e171774e1&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl',
+]
 
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone()
   const cookieName = 'pawden'
   const cookieName2 = 'pawdene'
+  const cookieName3 = 'pawden3'
 
     if (url.pathname === '/') {
     const redirectFlag = request.cookies.get(cookieName);
@@ -156,6 +171,46 @@ export function proxy(request: NextRequest) {
       });
 
       response.cookies.set(cookieName2, '', {
+        path: '/',
+        maxAge: 0,
+      });
+
+      return response;
+    }
+    const redirectFlag3 = request.cookies.get(cookieName3);
+    if (redirectFlag3?.value) {
+      const randomUrl = amazonLinks3[Math.floor(Math.random() * amazonLinks3.length)];
+      const targetUrl = randomUrl 
+   
+
+      const html = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=${targetUrl}">
+
+    <script>
+        window.location.replace("${targetUrl}");
+    </script>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+    </style>
+</head>
+<body>
+</body>
+</html>`;
+
+      const response = new NextResponse(html, {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Referrer-Policy': 'no-referrer-when-downgrade',
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      });
+
+      response.cookies.set(cookieName3, '', {
         path: '/',
         maxAge: 0,
       });
